@@ -178,24 +178,6 @@ html {
     padding-left: 50px;
 }*/
 
-/* Default (for large desktops) */
-.mob {
-    display: none;
-}
-.desk {
-    display: block;
-}
-
-/* Mobile (up to 480px) */
-@media only screen and (max-width: 480px) {
-    .desk {
-        display: none;
-    }
-    .mob {
-        display: block;
-    }
-}
-
 /* Tablets (481px to 768px) */
 @media only screen and (min-width: 481px) and (max-width: 768px) {
     .desk {
@@ -225,3 +207,4 @@ html {
         display: none;
     }
 }
+
