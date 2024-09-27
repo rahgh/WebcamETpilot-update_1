@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="author" content="Rahimeh Gharibpour" />
+    <meta name="description" content="Eye Tracking on the Map" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Eye Tracking on the Map</title>
+	
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+    <!-- Stylesheet -->
+    <link rel="stylesheet" media="screen and (min-device-width: 1201px)" href="css/style.css" />
+
+    <style>
+      /* Calibration button positions */
+      #Pt1, #Pt2, #Pt3, #Pt4, #Pt5, #Pt6, #Pt7, #Pt8, #Pt9 {
+          position: absolute;
+      }
+
+      /* regular set of points */
+      #Pt1 { top: 35%; left: 20%; }
+      #Pt2 { top: 35%; left: 50%; }
+      #Pt3 { top: 35%; left: 80%; }
+
+      #Pt4 { top: 60%; left: 20%; }
+      #Pt5 { top: 60%; left: 50%; }
+      #Pt6 { top: 60%; left: 80%; }
+
+      #Pt7 { top: 85%; left: 20%; }
+      #Pt8 { top: 85%; left: 50%; }
+      #Pt9 { top: 85%; left: 80%; }
+
+      #camera-feed {
+          max-width:50%;
+          object-fit: fill;
+          border-radius: 10px;
+          margin-top: 15px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="header">
+      <p style="font-size: 20px; font-weight: bold;">Eye Tracking on the Map</p>
+    </div>
+
+    <!-- Main body -->
+    <div>
+
+      <div id="notice" class="text" style="font-weight: bold; text-align: center; font-size: 18px;">
+        <p>Dear participant, this study is part of a research project.
+          All results will be deleted once the study is published.</p>
+        <p><span style="color: #0066FF;">We value your privacy and do not store any images from your camera.
+            It is not our intention to collect any personal data,
+            and you always have the right to request the removal of your data.
+        </span></p>
+      </div>
+
+      <!-- Modals for Step-by-Step Instructions -->
+
+      <!-- Research Project Info Modal -->
+      <div id="research-info-modal" class="modal">
+        <div class="modal-content">
+          <img src="images/hello.png" class="custom-image" alt="Emoji">
+          <p>Please read and follow all the instructions carefully.</p>
+          <p style="text-align: center">
+            <button class="modal-button" id="research-info-modal-button" style="align: center;">Next</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Stay Still Modal -->
+      <div id="stay-still-modal" class="modal">
+        <div class="modal-content">
+          <img src="images/facial_recognition.png" class="custom-image" alt="Emoji">
+          <p>Try to keep your head still and stay in front of the screen for the whole time.</p>
+          <p>Make sure no one will interrupt you for the next few minutes.</p>
+          <p style="text-align: center">
+            <button class="modal-button" id="stay-still-modal-button">Next</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Camera Access Modal -->
+      <div id="camera-modal" class="modal">
+        <div class="modal-content">
+          <img src="images/webcam.png" class="custom-image" alt="Webcam icon">
+          <p>Please allow your camera access for testing.</p>
+          <p style="text-align: center">
+            <button class="modal-button" id="camera-allow-btn">Allow Camera</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Face Check Modal -->
+      <div id="face-check-modal" class="modal">
+        <div class="modal-content">
+          <p>Is your face clearly visible on the screen?</p>
+          <div>
+          <video id="camera-feed"></video>
+          </div>
+          <button class="modal-button" id="startCalibration" onclick="startCalibration()">Yes</button>
+          <button class="modal-button" id="retryCamera" onclick="retryCamera()">No</button>
+        </div>
+      </div>
+
+      <!-- Calibration section -->
+      <div id="calibration-init-message" class="modal style=margin:0;">
+           <div class="modal-content" style="margin:0; width:600px; height: 600px; position: relative; top: 20px; bottom: 0; left: 0; right: 0;">
+              <img src="images/calibration.png" class="img-fluid" alt="webgazer demo instructions"
+               style="width: 500px; height: 410px; display: block; margin: 0 auto;">
+              <p>First wait for the dialog and allow the camera for the WebGazer.</p>
+              <p>Then, for calibrating the measurement of eye positions,
+               please click on each of the  <b>9</b> points on the screen.
+               Each point must be clicked <b>5</b> times until it becomes <b>yellow</b>.</p>
+              <p>Always remember to keep your eyes within the <b>green frame</b>.</p>
+              <button class="modal-button">Calibrate</button>
+          </div>
+      </div>
+
+      <!-- Calibration Container -->
+      <div id="calibration-container" style="display: none;">
+        <p style="margin: 0;">Please keep your face in front the camera so that
+          your eyes are within the green frame.</p>
+        <div id="calibration-buttons">
+          <button id="Pt1" class="button calibration-point"></button>
+          <button id="Pt2" class="button calibration-point"></button>
+          <button id="Pt3" class="button calibration-point"></button>
+          <button id="Pt4" class="button calibration-point"></button>
+          <button id="Pt5" class="button calibration-point"></button>
+          <button id="Pt6" class="button calibration-point"></button>
+          <button id="Pt7" class="button calibration-point"></button>
+          <button id="Pt8" class="button calibration-point"></button>
+          <button id="Pt9" class="button calibration-point"></button>
+        </div>
+
+        <!-- Canvas for plotting -->
+        <canvas id="plotting_canvas" width="800" height="600" style="background-color: white;"></canvas>
+      </div>
+
+      <div id="calibration-accuracy" class="modal">
+         <div class="modal-content" style="margin: 0; width: 600px; height: 200px; position: relative;">
+          <p>Please do not move your mouse and stare at the middle dot for the next 5 seconds.
+            This will allow us to calculate the accuracy of our predictions.</p>
+          <button class="modal-button">Continue</button>
+        </div>
+      </div>
+
+      <div id="training-task-modal" class="modal">
+        <div class="modal-content">
+          <p>This is a <b>training task</b> before you start the <b> main tasks.</b></p>
+          <button class="modal-button" id="training-task-btn">Next</button>
+        </div>
+      </div>
+
+      <div id="eye-tracking-message-modal" class="modal">
+        <div class="modal-content">
+          <p>The map stimulus will disappear after <b>7 seconds</b> and
+            you will see a graphical answer screen where you can submit your response.
+            Please look at the <b>road network and hydrography</b>
+            on the map during eye tracking. <b>Remember </b> them for the survey question.</p>
+          <button class="modal-button" id="eye-tracking-message-btn">OK</button>
+        </div>
+      </div>
+      <div id="main-task-modal" class="modal">
+          <div class="modal-content">
+              <p>This is a <b>main task.</b></p>
+              <p>Each map stimulus will disappear after <b>7 seconds</b>
+                 and you will see a graphical answer screen where you can submit your response.</p>
+              <p>Please look at the <b>road network and hydrography</b>
+                 on the map during eye tracking. <b>Remember </b> them for the survey question.</p>
+              <button class="modal-button" id="main_task_modal_btn">Next</button>
+         </div>
+     </div>
+     
+      <!-- Training survey modal -->
+      <div class="map-container" id="map_0" style="display: none;">
+        <img src="images/map_0.png" alt="map">
+      </div>
+
+      <div id="survey-modal-0" class="modal">
+        <div class="modal-content">
+          <div class="custom-top-bar">
+            <p>Which of the following sketches is similar to the road network
+              and hydrography depicted on the map?</p>
+          </div>
+          <p>
+            <img src="images/map_0_survey.png" class="survey-image" alt="Survey 0">
+          </p>
+          <button class="modal-button" id="a">a</button>
+          <button class="modal-button" id="b">b</button>
+          <button class="modal-button" id="c">c</button>
+          <button class="modal-button" id="d">d</button>
+        </div>
+      </div>
+
+
+      <!-- Task 1 -->
+      <div class="map-container" id="map_1" style="display: none;">
+        <img src="images/map_1.png" alt="map">
+      </div>
+
+      <!-- Task 1 survey modal -->
+      <div id="survey-modal-1" class="modal">
+        <div class="modal-content">
+          <div class="custom-top-bar">
+            <p>Which of the following sketches is similar to the road network
+              and hydrography depicted on the map?</p>
+          </div>
+          <p>
+            <img src="images/map_1_survey.png" class="survey-image" alt="Survey 1">
+          </p>
+          <button class="modal-button" id="a">a</button>
+          <button class="modal-button" id="b">b</button>
+          <button class="modal-button" id="c">c</button>
+          <button class="modal-button" id="d">d</button>
+        </div>
+      </div>
+	  
+	  
+      <!-- Task 2 -->
+      <div class="map-container" id="map_2" style="display: none;">
+        <img src="images/map_2.png" alt="map">
+      </div>
+
+      <!-- Task 2 survey modal -->
+      <div id="survey-modal-2" class="modal">
+        <div class="modal-content">
+          <div class="custom-top-bar">
+            <p>Which of the following sketches is similar to the road network
+              and hydrography depicted on the map?</p>
+          </div>
+          <p>
+            <img src="images/map_2_survey.png" class="survey-image" alt="Survey 2">
+          </p>
+          <button class="modal-button" id="a">a</button>
+          <button class="modal-button" id="b">b</button>
+          <button class="modal-button" id="c">c</button>
+          <button class="modal-button" id="d">d</button>
+        </div>
+      </div>
+      <!-- Task 3 -->
+      <div class="map-container" id="map_3" style="display: none;">
+        <img src="images/map_3.png" alt="map">
+      </div>
+
+      <!-- Task 3 survey modal -->
+      <div id="survey-modal-3" class="modal">
+        <div class="modal-content">
+          <div class="custom-top-bar">
+            <p>Which of the following sketches is similar to the road network
+              and hydrography depicted on the map?</p>
+          </div>
+          <p>
+            <img src="images/map_3_survey.png" class="survey-image" alt="Survey 3">
+          </p>
+          <button class="modal-button" id="a">a</button>
+          <button class="modal-button" id="b">b</button>
+          <button class="modal-button" id="c">c</button>
+          <button class="modal-button" id="d">d</button>
+        </div>
+      </div>
+
+      <!-- User Information Modal -->
+      <div id="user-info-modal" class="modal">
+        <div class="modal-content">
+          <p>Optional info for the survey</p>
+          <form id="user-info-form">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required min="0">
+            <br><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <br><br>
+            <button class="modal-button" type="button" onclick="submitUserInfo()">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="final-message" class="modal">
+        <div class="modal-content">
+          <p>Thank you very much for attending the survey.</p>
+          <p>The survey window can now be closed.</p>
+          <button class="modal-button" type="button" onclick="closeFinalMessage()">OK</button>
+        </div>
+      </div>
+
+      <!-- End of main body -->
+
+      <!-- WebGazer.js library -->
+      <script src="https://webgazer.cs.brown.edu/webgazer.js" type="text/javascript"></script>
+      <!-- Main javascript -->
+      <script src="js/main.js"></script>
+
+  </body>
+</html>
