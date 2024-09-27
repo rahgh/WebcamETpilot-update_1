@@ -87,23 +87,20 @@ html {
     width: 100%;
     max-width: 1050px;
     border-radius: 8px;
+	text-align: center;
 }
 
 #notice p {
+	font-size: 18px;
     margin-bottom: 3px;
+	font-weight: bold;
 }
 
 #notice span {
     color: #0066FF;
+	font-weight: bold;
 }
 
-
-.custom-header {
-	position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 .custom-image {
 	position: relative;
@@ -178,33 +175,12 @@ html {
     padding-left: 50px;
 }*/
 
-/* Tablets (481px to 768px) */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
+/* Adjust for different devices with different screen sizes */
+@media only screen and (min-width: 481px) and (max-width: 1200px) {
     .desk {
-        display: none;
+        display: none; /* Hide desktop-specific elements */
     }
     .mob {
-        display: block;
+        display: block; /* Show mobile-specific elements */
     }
 }
-
-/* Laptops and small desktops (769px to 1200px) */
-@media only screen and (min-width: 769px) and (max-width: 1200px) {
-    .desk {
-        display: block;
-    }
-    .mob {
-        display: none;
-    }
-}
-
-/* Large desktops (1201px and above) */
-@media only screen and (min-width: 1201px) {
-    .desk {
-        display: block;
-    }
-    .mob {
-        display: none;
-    }
-}
-
