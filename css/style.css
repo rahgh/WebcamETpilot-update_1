@@ -1,0 +1,227 @@
+html {
+    font-family: system-ui;
+    height: 100%; /* Ensure the body takes full height */
+    margin: 0; /* Remove default margin */
+    padding:0;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+}
+
+#header
+{
+	position: relative;
+    top: 0px;
+    left: 0px;
+    height: 32px;
+    background: #007D1C;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+
+}
+
+
+/* calibration and canvas styling */
+#calibration-container {
+    text-align: center;
+}
+
+/* button styling */
+.button {
+    width: 30px;
+    height: 30px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid black;
+    color: white;
+    background-color: red;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    overflow: hidden;
+    text-align: center;
+    opacity: 0.2;
+    position: fixed;
+}
+
+/* modal styles */
+.modal {
+    display: none;  /* Modal is hidden by default */
+    position: fixed;  /* Make it appear over the content */
+    top: 50%;        /* Center vertically */
+    left: 50%;       /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for width/height offsets */
+    background-color: rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.modal-content {
+    background-color: rgb(240,240,240);
+    padding: 10px;
+    border: 2px solid #888;
+	margin:auto;
+    width: 700px;
+    border-radius: 10px;
+    text-align: center;
+	position: relative;
+}
+
+.modal-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 8px;
+}
+
+/* notice section */
+#notice {
+	position: relative;
+    background-color: #ffffff;
+    padding:1 px;
+    margin: 4px auto;
+    width: 100%;
+    max-width: 1050px;
+    border-radius: 8px;
+}
+
+#notice p {
+    margin-bottom: 3px;
+}
+
+#notice span {
+    color: #0066FF;
+}
+
+
+.custom-header {
+	position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.custom-image {
+	position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    margin-bottom: 10px;
+}
+.maps-wrapper {
+    display: flex;
+    flex-direction: column; /* Arrange maps in a column */
+    align-items: center; /* Center maps horizontally */
+    width: 100%; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+}
+
+.map-container {
+    position: relative;
+    width: 100%; /* Set to 100% for responsiveness */
+    max-width: 100%; /* Set maximum width to 100% */
+    height: 660px; /* Fixed height */
+    margin: 5px auto; /* Center the container horizontally */
+    border: 1px solid #ccc; /* Optional border around the div */
+    padding: 0; /* Remove all padding from the map container */
+    box-sizing: border-box; /* Ensure padding and border do not affect the size */
+    border-radius: 5px; /* Optional rounded corners */
+    overflow: hidden; /* Ensure content does not overflow */
+    text-align: center; /* Center the content */
+}
+.survey-image {
+	position: relative;
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* video feed styling */
+
+#webgazerVideoContainer {
+	position: relative;
+    display: block !important;
+    position: fixed !important;
+    top:20px !important;
+    left: 0px !important;
+    width: 320px !important; 
+    height: 220px !important; 
+    z-index: 9999 !important;
+}
+
+/* Adjust the size of the video element itself */
+#webgazerVideoFeed {
+    width: 100% !important; /* Ensure the video takes up 100% of the container's width */
+    height: 100% !important; /* Ensure the video takes up 100% of the container's height */
+    object-fit: cover;       /* Optionally, use object-fit to control how the video fits in the container */
+}
+
+#accuracy a{
+    background-color: #222;
+    color: #eee;
+    left: -15px;
+    padding-left: 80px;
+    padding-right: 40px;
+}
+
+#accuracy {
+    background-color: #222;
+    padding-left: inherit;
+}
+
+/*li {
+    padding-left: 50px;
+}*/
+
+/* Default (for large desktops) */
+.mob {
+    display: none;
+}
+.desk {
+    display: block;
+}
+
+/* Mobile (up to 480px) */
+@media only screen and (max-width: 480px) {
+    .desk {
+        display: none;
+    }
+    .mob {
+        display: block;
+    }
+}
+
+/* Tablets (481px to 768px) */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .desk {
+        display: none;
+    }
+    .mob {
+        display: block;
+    }
+}
+
+/* Laptops and small desktops (769px to 1200px) */
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+    .desk {
+        display: block;
+    }
+    .mob {
+        display: none;
+    }
+}
+
+/* Large desktops (1201px and above) */
+@media only screen and (min-width: 1201px) {
+    .desk {
+        display: block;
+    }
+    .mob {
+        display: none;
+    }
+}
