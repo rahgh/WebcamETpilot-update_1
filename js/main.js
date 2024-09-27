@@ -125,13 +125,16 @@ async function getIP() {
     }
 }
 
-// function to adjust style
+// Function to adjust style based on window width
 function adjustStyle(width) {
-  if (width < 720) {
-    $("#size-stylesheet").attr("href", "css/mobile-style.css");
-  } else if (width < 960) {
+   if (width < 769) {
+    // Tablets
     $("#size-stylesheet").attr("href", "css/tablet-style.css");
+  } else if (width < 1201) {
+    // Laptops
+    $("#size-stylesheet").attr("href", "css/laptop-style.css");
   } else {
+    // Large desktops
     $("#size-stylesheet").attr("href", "css/style.css");
   }
 }
