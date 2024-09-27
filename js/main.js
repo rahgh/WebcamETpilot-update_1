@@ -124,28 +124,6 @@ async function getIP() {
         return undefined;
     }
 }
-
-// Function to adjust style based on window width
-function adjustStyle(width) {
-   if (width < 769) {
-    // Tablets
-    $("#size-stylesheet").attr("href", "css/style.css");
-  } else if (width < 1201) {
-    // Laptops
-    $("#size-stylesheet").attr("href", "css/style.css");
-  } else {
-    // Large desktops
-    $("#size-stylesheet").attr("href", "css/style.css");
-  }
-}
-
-$(document).ready(function() {
-  adjustStyle($(window).width());
-  $(window).resize(function() {
-    adjustStyle($(window).width());
-  });
-});
-
 // function to generate a unique user ID
 function generateUniqueUserId() {
     // current timestamp
