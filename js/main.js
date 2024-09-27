@@ -129,10 +129,10 @@ async function getIP() {
 function adjustStyle(width) {
    if (width < 769) {
     // Tablets
-    $("#size-stylesheet").attr("href", "css/tablet-style.css");
+    $("#size-stylesheet").attr("href", "css/style.css");
   } else if (width < 1201) {
     // Laptops
-    $("#size-stylesheet").attr("href", "css/laptop-style.css");
+    $("#size-stylesheet").attr("href", "css/style.css");
   } else {
     // Large desktops
     $("#size-stylesheet").attr("href", "css/style.css");
