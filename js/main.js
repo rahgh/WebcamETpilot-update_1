@@ -9,7 +9,7 @@ let lastEyeCheckTime_ms = Date.now();
 let clickCounter = 0;
 let isEyePositionCorrect = false
 const eyeCheckDelay_ms = 500; // Check every 500ms 
-const sufficientMeasurementAccuracy = 70;  // sufficient percentage of accuracy
+const sufficientMeasurementAccuracy = 50;  // sufficient percentage of accuracy
 const userId = generateUniqueUserId();  // unique user ID
 
 // modals
