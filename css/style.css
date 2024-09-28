@@ -67,6 +67,61 @@ html {
 	position: relative;
 }
 
+@media (max-width: 768px) {
+    .modal-content {
+        width: 100%;
+        max-width: 90%; /* Make sure the modal fits smaller screens */
+    }
+}
+
+
+
+.modal_1 {
+    display: none;  /* Modal is hidden by default */
+    position: fixed;  /* Make it appear over the content */
+    top: 55%;        /* Center vertically */
+    left: 50%;       /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for width/height offsets */
+    background-color: rgba(255, 255, 255, 1);
+    text-align: center;
+    z-index: 9999;  /* Ensure it's on top */
+    width: 90vw;    /* Set modal width relative to viewport width */
+    max-width: 600px; /* Don't let it exceed 600px */
+}
+
+.modal-content_1 {
+    background-color: rgb(240,240,240);
+    padding: 10px;
+    border: 2px solid #888;
+    margin: auto;
+    width: 90%;    /* Relative width */
+    max-width: 700px;  /* Restrict the maximum width */
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;  /* Include padding in width/height calculations */
+}
+
+.img-fluid {
+    width: 100%;   /* Image will take full width of its container */
+    height: auto;  /* Maintain aspect ratio */
+    max-width: 500px; /* Limit the maximum width */
+    display: block;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+    .modal-content_1 {
+        width: 90%;
+        max-width: 90%; /* Make sure the modal fits smaller screens */
+    }
+
+    .img-fluid {
+        max-width: 100%; /* Allow image to adapt to mobile screen sizes */
+    }
+}
+
 .modal-button {
     background-color: #4CAF50;
     color: white;
@@ -121,14 +176,8 @@ html {
     position: relative;
     width: 100%; /* Set to 100% for responsiveness */
     max-width: 100%; /* Set maximum width to 100% */
-    height: 660px; /* Fixed height */
     margin: 5px auto; /* Center the container horizontally */
-    border: 1px solid #ccc; /* Optional border around the div */
-    padding: 0; /* Remove all padding from the map container */
-    box-sizing: border-box; /* Ensure padding and border do not affect the size */
-    border-radius: 5px; /* Optional rounded corners */
-    overflow: hidden; /* Ensure content does not overflow */
-    text-align: center; /* Center the content */
+	text-align: center; /* Center the content */
 }
 .survey-image {
 	position: relative;
