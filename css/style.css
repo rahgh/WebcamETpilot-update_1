@@ -66,13 +66,6 @@ html {
 	position: relative;
 }
 
-@media (max-width: 768px) {
-    .modal-content {
-        width: 100%;
-        max-width: 90%; /* Make sure the modal fits smaller screens */
-    }
-}
-
 .modal_1 {
     display: none;  /* Modal is hidden by default */
     position: fixed;  /* Make it appear over the content */
