@@ -20,7 +20,6 @@ html {
 
 }
 
-
 /* calibration and canvas styling */
 #calibration-container {
     text-align: center;
@@ -74,8 +73,6 @@ html {
     }
 }
 
-
-
 .modal_1 {
     display: none;  /* Modal is hidden by default */
     position: fixed;  /* Make it appear over the content */
@@ -109,7 +106,6 @@ html {
     display: block;
     margin: 0 auto;
 }
-
 
 @media (max-width: 768px) {
     .modal-content_1 {
