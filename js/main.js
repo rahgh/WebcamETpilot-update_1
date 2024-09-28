@@ -156,7 +156,7 @@ function WebGazerListener(data, elapsedTime, checkEyePosition) {
                 const checkEyes = checkEyesInValidationBox(videoElement, data.eyeFeatures);
                 console.log(`checkEyesInValidationBox = ${checkEyes}`);
                 updateValidationBoxColor(checkEyes);
-                if (checkEyes === 1) {
+                if (checkEyes = 1) {
                     if (!isEyePositionCorrect) {
                         isEyePositionCorrect = true;
                         setTimeout(() => {
@@ -170,7 +170,7 @@ function WebGazerListener(data, elapsedTime, checkEyePosition) {
                     isEyePositionCorrect = false;
                     webgazer.showVideo(true);
                     webgazer.showFaceFeedbackBox(true);
-                    if (checkEyes === -1) {
+                    if (checkEyes = -1) {
                         showAlert('Please keep your head in front of your webcam.');
                     }
                 }
