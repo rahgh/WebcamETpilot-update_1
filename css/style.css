@@ -20,6 +20,7 @@ html {
 
 }
 
+
 /* calibration and canvas styling */
 #calibration-container {
     text-align: center;
@@ -72,6 +73,9 @@ html {
         max-width: 90%; /* Make sure the modal fits smaller screens */
     }
 }
+
+
+
 .modal_1 {
     display: none;  /* Modal is hidden by default */
     position: fixed;  /* Make it appear over the content */
@@ -105,6 +109,7 @@ html {
     display: block;
     margin: 0 auto;
 }
+
 
 @media (max-width: 768px) {
     .modal-content_1 {
@@ -151,6 +156,7 @@ html {
 	font-weight: bold;
 }
 
+
 .custom-image {
 	position: relative;
     width: 100px;
@@ -173,6 +179,14 @@ html {
     margin: 5px auto; /* Center the container horizontally */
 	text-align: center; /* Center the content */
 }
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 100%;
+        max-width: 90%; /* Make sure the modal fits smaller screens */
+    }
+}
+
 .survey-image {
 	position: relative;
     width: 80%;
@@ -180,6 +194,7 @@ html {
     border-radius: 10px;
     margin-bottom: 10px;
 }
+
 
 /* video feed styling */
 
