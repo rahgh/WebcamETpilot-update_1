@@ -66,6 +66,7 @@ html {
 	position: relative;
 }
 
+
 .modal_1 {
     display: none;  /* Modal is hidden by default */
     position: fixed;  /* Make it appear over the content */
@@ -80,13 +81,11 @@ html {
 }
 
 .modal-content_1 {
-    background-color: rgb(240,240,240);
-    padding: 10px;
+    padding: 5px;
     border: 2px solid #888;
     margin: auto;
-    width: 90%;    /* Relative width */
+    width: 100%;    /* Relative width */
     max-width: 700px;  /* Restrict the maximum width */
-    border-radius: 10px;
     text-align: center;
     position: relative;
     box-sizing: border-box;  /* Include padding in width/height calculations */
@@ -98,17 +97,6 @@ html {
     max-width: 500px; /* Limit the maximum width */
     display: block;
     margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .modal-content_1 {
-        width: 90%;
-        max-width: 90%; /* Make sure the modal fits smaller screens */
-    }
-
-    .img-fluid {
-        max-width: 100%; /* Allow image to adapt to mobile screen sizes */
-    }
 }
 
 .modal-button {
@@ -145,7 +133,6 @@ html {
 	font-weight: bold;
 }
 
-
 .custom-image {
 	position: relative;
     width: 100px;
@@ -172,7 +159,7 @@ html {
 @media (max-width: 768px) {
     .modal-content {
         width: 100%;
-        max-width: 90%; /* Make sure the modal fits smaller screens */
+        max-width: 100%; /* Make sure the modal fits smaller screens */
     }
 }
 
