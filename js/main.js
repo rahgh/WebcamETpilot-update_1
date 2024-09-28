@@ -9,7 +9,7 @@ let lastEyeCheckTime_ms = Date.now();
 let clickCounter = 0;
 let isEyePositionCorrect = false
 const eyeCheckDelay_ms = 500; // Check every 500ms 
-const sufficientMeasurementAccuracy = 50;  // sufficient percentage of accuracy
+const sufficientMeasurementAccuracy = 20;  // sufficient percentage of accuracy
 const userId = generateUniqueUserId();  // unique user ID
 
 // modals
@@ -124,6 +124,7 @@ async function getIP() {
         return undefined;
     }
 }
+
 // function to generate a unique user ID
 function generateUniqueUserId() {
     // current timestamp
@@ -156,7 +157,7 @@ function WebGazerListener(data, elapsedTime, checkEyePosition) {
                 const checkEyes = checkEyesInValidationBox(videoElement, data.eyeFeatures);
                 console.log(`checkEyesInValidationBox = ${checkEyes}`);
                 updateValidationBoxColor(checkEyes);
-                if (checkEyes = 1) {
+                if (checkEyes === 1) {
                     if (!isEyePositionCorrect) {
                         isEyePositionCorrect = true;
                         setTimeout(() => {
@@ -170,7 +171,7 @@ function WebGazerListener(data, elapsedTime, checkEyePosition) {
                     isEyePositionCorrect = false;
                     webgazer.showVideo(true);
                     webgazer.showFaceFeedbackBox(true);
-                    if (checkEyes = -1) {
+                    if (checkEyes === -1) {
                         showAlert('Please keep your head in front of your webcam.');
                     }
                 }
@@ -239,7 +240,7 @@ function showAlert(message) {
 function createAlertDiv() {
     const div = document.createElement('div');
     div.id = 'eyeTrackingAlert';
-    div.style.cssText = 'position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background-color: #ffcccc; padding: 10px; border-radius: 5px; z-index: 1000;';
+    div.style.cssText = 'position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background-color: #ffcccc; padding: 10px; border-radius: 5px; z-index: 9999;';
     document.body.appendChild(div);
     return div;
 }
@@ -272,21 +273,6 @@ function initWebGazer() {
     webgazer.begin();
     // start calibration process
     showCalibrationInitMessage();
-}
-
-// define the startinitEyeTracking function
-function startbeginWebGazer() {
-    console.log('begin WebGazer...');
-
-    // show the map and initialize eye tracking
-	showTrainingModal();
-	showMainModal();
-    // Stop or pause WebGazer after 7 seconds
-	eyeCheckDelay_ms = 500;  // 500ms time interval to check the eye position
-    setTimeout(function() {
-        console.log('Pausing WebGazer...');
-        webgazer.pause(); // Assuming this is how you pause WebGazer
-    }, 7000);
 }
 
 // Check eyes in the validation box using WebGazer's built-in logic
