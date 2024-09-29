@@ -349,7 +349,7 @@ function collectResults(eyeTrackingData, fixationData, surveyAnswer) {
             'fixation_end_at_ms': data.fixation_ends_at_ms});
     });
 
-    let results = {'user_id': userId,'eye_tracking_data': eye_tracking_data,
+    let results = {'calibration_accuracy': calibrationAccuracy ,'user_id': userId,'eye_tracking_data': eye_tracking_data,
         'fixation_data': fixation_data,
         'survey_answer': surveyAnswer};
     return results;
@@ -509,6 +509,7 @@ function calcAccuracy() {
 
         var past50 = webgazer.getStoredPoints(); // retrieve the stored points
         var precision_measurement = calculatePrecision(past50);
+		calibrationAccuracy = precision_measurement;  // <-- Store the accuracy here
         let [accuracy_precision_modal, isAccuracySufficient] =
             calibrationAccuracyModal(precision_measurement);
 
